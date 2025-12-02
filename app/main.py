@@ -15,14 +15,15 @@ os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY", "gsk_MJRiQT7MadVWBYreGksO
 
 embed_model = SentenceTransformer(
     "all-MiniLM-L6-v2",
-    device="cpu"  # change to "cuda" if you have GPU
+    device="cpu"  # (Change to "cuda" if Stong GPU)
 )
 
 chat_client = ChatGroq(model="deepseek-r1-distill-llama-70b", temperature=0)
 
 app = FastAPI(title="RAG Policy Search API")
 
-# In-memory storage
+# In-memory storage( tried with faiss but getting some version issues in macbook)
+
 CHUNKS = []
 EMBEDS = []
 
@@ -79,29 +80,25 @@ Question:
 Answer:
 """
 
-    # Initialize Groq model (use the global one or create new)
+    # Initialize Groq model
     grok_model = ChatGroq(
-        groq_api_key=os.getenv("GROQ_API_KEY"),  # Use env var properly
+        groq_api_key=os.getenv("GROQ_API_KEY"), 
         model="llama-3.3-70b-versatile",
         temperature=0
     )
 
-    # CORRECT WAY: Use .invoke() method
     try:
         response = grok_model.invoke(hr_policy_prompt)
         return response.content  # Extract the content from response
     except Exception as e:
         return f"Error generating answer: {str(e)}"
 
-
 # Pydantic model
-# -------------------------
+
 class Query(BaseModel):
     question: str
 
-# -------------------------
 # FastAPI Routes
-# -------------------------
 @app.get("/")
 def home():
     return {"message": "RAG Policy Search API running. Use /docs to test."}

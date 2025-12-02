@@ -13,16 +13,14 @@ This service allows you to upload a PDF or text policy document, automatically c
 - REST endpoints to upload policy & query it
 
 ## 📂 Project Structure
-
 rag-five/
 │── Dockerfile
 │── docker-compose.yml
-│── req.txt 
+│── req.txt
 │── README.md
 │── .env (optional)
-│
-└── app/ 
-└── main.py
+└── app/
+    └── main.py
 
 ## ⚙️ Architecture Overview
 

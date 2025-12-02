@@ -18,7 +18,7 @@ embed_model = SentenceTransformer(
     device="cpu"  # (Change to "cuda" if Stong GPU)
 )
 
-chat_client = ChatGroq(model="deepseek-r1-distill-llama-70b", temperature=0)
+# chat_client = ChatGroq(model="deepseek-r1-distill-llama-70b", temperature=0)
 
 app = FastAPI(title="RAG Policy Search API")
 

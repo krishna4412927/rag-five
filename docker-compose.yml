@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  rag-api:
+    build: .
+    container_name: rag_policy_api
+    ports:
+      - "8000:8000"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - HUGGINGFACEHUB_API_TOKEN=${HUGGINGFACEHUB_API_TOKEN}
+    volumes:
+      - .:/app
+
